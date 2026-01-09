@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { BsCart4 } from "react-icons/bs";
+import { ProductDatacontext } from '../context/ProductContext';
 
 const Navbar = () => {
   const [input, setInput] = useState(false)
+  const {count} = useContext(ProductDatacontext)
   return (
     <div>
         <div className="navbar bg-base-100 shadow-sm">
@@ -32,7 +34,7 @@ const Navbar = () => {
     <button className="btn btn-ghost btn-circle">
       <div className="indicator">
         <BsCart4 className='w-5 h-5'/>
-        <span className="badge badge-xs badge-primary indicator-item">0</span>
+        <span className="badge badge-xs badge-primary indicator-item">{count}</span>
       </div>
     </button>
   </div>

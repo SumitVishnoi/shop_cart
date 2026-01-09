@@ -6,6 +6,7 @@ export const ProductDatacontext = createContext()
 
 const ProductContext = ({children}) => {
     const [products, setProducts] = useState([])
+    const [count, setCount] = useState(0)
     const setData = async ()=> {
         const data = await getData()
 
@@ -16,9 +17,15 @@ const ProductContext = ({children}) => {
   useEffect(()=> {
     setData()
   }, [])
+
+  const value = {
+    products,
+    count,
+    setCount
+  }
   return (
     <div>
-        <ProductDatacontext.Provider value={products}>
+        <ProductDatacontext.Provider value={value}>
             {children}
         </ProductDatacontext.Provider>
     </div>

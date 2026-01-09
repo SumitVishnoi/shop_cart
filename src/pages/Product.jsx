@@ -4,15 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 const Product = () => {
   const navigate = useNavigate();
-  const data = useContext(ProductDatacontext);
+  const {products} = useContext(ProductDatacontext);
 
-  let renderData = "Loading...";
+  console.log(products)
 
-  if (data.length > 0) {
-    renderData = data.map((elem, idx) => (
+  return (
+    <div className="min-h-screen flex flex-wrap gap-5 justify-center p-10 bg-zinc-300">
+      {products.map((elem, idx) => (
       <div
         key={idx}
-        className="card bg-zinc-700 w-96 shadow-md shadow-gray-700"
+        className="card bg-zinc-100 w-96 shadow-md shadow-gray-700"
       >
         <div className=" h-[40vh] flex justify-center items-center p-2">
           <img
@@ -22,26 +23,21 @@ const Product = () => {
           />
         </div>
         <div className="card-body">
-          <h2 className="card-title text-white font-bold line-clamp-2">
+          <h2 className="card-title text-black font-bold line-clamp-2">
             {elem.title}
           </h2>
-          <p className="line-clamp-2 text-gray-300">{elem.description}</p>
+          <p className="line-clamp-2 text-gray-600">{elem.description}</p>
           <div className="card-actions justify-end">
             <button
               onClick={() => navigate(`/product/${elem.id}`)}
-              className="btn btn-primary"
+              className="btn btn-primary cursor-pointer active:scale-95"
             >
               Buy Now
             </button>
           </div>
         </div>
       </div>
-    ));
-  }
-
-  return (
-    <div className="min-h-screen flex flex-wrap gap-5 justify-center p-10">
-      {renderData}
+    ))}
     </div>
   );
 };
