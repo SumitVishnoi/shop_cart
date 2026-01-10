@@ -6,7 +6,8 @@ const ProductDetails = () => {
   const { id } = useParams();
   const {products, count, setCount} = useContext(ProductDatacontext);
 
-    let selectedProduct = products.find((elem) => elem.id == id);
+  
+  let selectedProduct = products.find((elem) => elem.id == id)
 
   const recommendedProducts = products.filter((item)=> 
     item.category === selectedProduct?.category &&

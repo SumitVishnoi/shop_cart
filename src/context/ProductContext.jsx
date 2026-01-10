@@ -7,21 +7,35 @@ export const ProductDatacontext = createContext()
 const ProductContext = ({children}) => {
     const [products, setProducts] = useState([])
     const [count, setCount] = useState(0)
+    const [search, setSearch] = useState('')
+    const [debouncedSearch, setDebouncedSearch] = useState('')
+
     const setData = async ()=> {
         const data = await getData()
 
         setProducts(data)
-
   }
 
   useEffect(()=> {
     setData()
   }, [])
 
+  useEffect(()=> {
+    const timer = setTimeout(()=> {
+      setDebouncedSearch(search)
+    }, 300)
+
+    return ()=> clearTimeout(timer)
+  }, [search])
+
   const value = {
     products,
     count,
-    setCount
+    setCount,
+    search,
+    setSearch,
+    debouncedSearch,
+    setDebouncedSearch
   }
   return (
     <div>
